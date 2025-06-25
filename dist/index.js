@@ -32776,16 +32776,24 @@ ${pendingInterceptorsFormatter.format(pending)}
 				core.info("Pull request is already a draft.");
 				return;
 			}
-			console.log({ indicator });
 			if (body.includes(indicator)) {
 				core.info("Pull request already contains the indicator.");
 				return;
 			}
+			const octokit = github.getOctokit(githubToken);
+			await octokit.rest.pulls.update({
+				body: `${body}\n\n<!-- ${indicator} -->`,
+				owner,
+				pull_number: number,
+				repo,
+			});
+			core.info(
+				`PR body updated to include comment with indicator: ${indicator}`,
+			);
 			if (!message) {
 				core.info("Skipping comment creation as no message is provided.");
 				return;
 			}
-			const octokit = github.getOctokit(githubToken);
 			const data = await octokit.rest.issues.createComment({
 				body: message,
 				issue_number: number,
