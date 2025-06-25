@@ -23,6 +23,7 @@ export async function runDraftPullRequestOnceAction(
 		);
 		return;
 	}
+
 	await draftPullRequestOnceAction({
 		body: payloadData.body,
 		drafted: payloadData.draft,

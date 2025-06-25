@@ -32782,13 +32782,28 @@ ${pendingInterceptorsFormatter.format(pending)}
 				return;
 			}
 			const octokit = github.getOctokit(githubToken);
-			await octokit.rest.pulls.update({
-				body: `${body}\n\n<!-- ${indicator} -->`,
-				draft: true,
-				owner,
-				pull_number: number,
-				repo,
-			});
+			await Promise.all([
+				octokit.graphql(
+					`
+				mutation ($number: ID!) {
+					convertPullRequestToDraft(input: {pullRequestId: $number}) {
+						pullRequest {
+							id
+							isDraft
+						}
+					}
+				}
+			`,
+					{ number },
+				),
+				octokit.rest.pulls.update({
+					body: `${body}\n\n<!-- ${indicator} -->`,
+					draft: true,
+					owner,
+					pull_number: number,
+					repo,
+				}),
+			]);
 			core.info(
 				`PR body updated to include comment with indicator: ${indicator}`,
 			);
