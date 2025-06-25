@@ -20,15 +20,22 @@
 
 ## Usage
 
-```shell
-npm i draft-pull-request-once-action
+This action may be run in a `pull_request` or `pull_request_target` workflow.
+It will draft the pull request _once_: meaning, if re-run after the PR is un-drafted, it won't re-draft the PR.
+
+```yml
+runs:
+  steps:
+    - id: package-change
+      uses: JoshuaKGoldberg/draft-pull-request-once-action@0.1.0
+      with:
+        github-token: ${{ secrets.ACCESS_TOKEN }}
 ```
 
-```ts
-import { greet } from "draft-pull-request-once-action";
+Optional inputs are:
 
-greet("Hello, world! 💖");
-```
+- `indicator` (`string`): Hidden comment to add to the pull request body when it is changed to draft.
+- `message` (`string`): Visible message to comment on the pull request when it is changed to draft.
 
 ## Development
 
