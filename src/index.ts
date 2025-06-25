@@ -24,7 +24,6 @@ export async function draftPullRequestOnceAction({
 	owner,
 	repo,
 }: DraftPullRequestOnceActionOptions) {
-	console.log({ nodeId });
 	if (drafted) {
 		core.info("Pull request is already a draft.");
 		return;
