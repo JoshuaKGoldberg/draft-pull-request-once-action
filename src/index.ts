@@ -29,6 +29,7 @@ export async function draftPullRequestOnceAction({
 		return;
 	}
 
+	console.log({ defaultIndicator, indicator });
 	if (body.includes(indicator)) {
 		core.info("Pull request already contains the indicator.");
 		return;
