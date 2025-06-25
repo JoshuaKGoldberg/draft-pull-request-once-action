@@ -9,6 +9,7 @@ import { getTokenInput } from "./getTokenInput.js";
 type PayloadData = typeof github.context.payload.pull_request & {
 	body: string;
 	draft: boolean;
+	id: number;
 	number: number;
 };
 
@@ -28,6 +29,7 @@ export async function runDraftPullRequestOnceAction(
 		body: payloadData.body,
 		drafted: payloadData.draft,
 		githubToken: getTokenInput("github-token", "GITHUB_TOKEN"),
+		id: payloadData.id,
 		indicator: core.getInput("indicator") || defaultIndicator,
 		message: core.getInput("message"),
 		number: payloadData.number,

@@ -5,6 +5,7 @@ export interface DraftPullRequestOnceActionOptions {
 	body: string;
 	drafted?: boolean;
 	githubToken: string;
+	id: string;
 	indicator: string;
 	message?: string;
 	number: number;
@@ -16,6 +17,7 @@ export async function draftPullRequestOnceAction({
 	body,
 	drafted,
 	githubToken,
+	id,
 	indicator,
 	message,
 	number,
