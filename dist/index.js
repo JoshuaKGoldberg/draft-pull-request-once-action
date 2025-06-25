@@ -32776,6 +32776,7 @@ ${pendingInterceptorsFormatter.format(pending)}
 				core.info("Pull request is already a draft.");
 				return;
 			}
+			console.log({ body, indicator });
 			if (body.includes(indicator)) {
 				core.info("Pull request already contains the indicator.");
 				return;
@@ -32826,8 +32827,6 @@ ${pendingInterceptorsFormatter.format(pending)}
 				);
 				return;
 			}
-			// console.log("Got context:", context);
-			// console.log("Got context.payload:", context.payload);
 			await draftPullRequestOnceAction({
 				body: payloadData.body,
 				drafted: payloadData.draft,

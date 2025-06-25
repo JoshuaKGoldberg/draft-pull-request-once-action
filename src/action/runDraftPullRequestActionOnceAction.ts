@@ -23,9 +23,6 @@ export async function runDraftPullRequestOnceAction(
 		);
 		return;
 	}
-	// console.log("Got context:", context);
-	// console.log("Got context.payload:", context.payload);
-
 	await draftPullRequestOnceAction({
 		body: payloadData.body,
 		drafted: payloadData.draft,
