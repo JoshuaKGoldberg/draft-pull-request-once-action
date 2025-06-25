@@ -1,5 +1,5 @@
 import * as github from "@actions/github";
 
-import { runPackageChangeDetectorAction } from "./runPackageChangeDetectorAction.js";
+import { runDraftPullRequestOnceAction } from "./runDraftPullRequestActionOnceAction.js";
 
-await runPackageChangeDetectorAction(github.context);
+await runDraftPullRequestOnceAction(github.context);

@@ -2,7 +2,7 @@ import type * as github from "@actions/github";
 
 import { describe, expect, it, vi } from "vitest";
 
-import { runPackageChangeDetectorAction } from "./runPackageChangeDetectorAction.js";
+import { runDraftPullRequestOnceAction } from "./runDraftPullRequestActionOnceAction.js";
 
 const mockGetMultilineInput = vi.fn();
 const mockSetFailed = vi.fn();
@@ -16,26 +16,26 @@ vi.mock("@actions/core", () => ({
 	},
 }));
 
-const mockPackageChangeDetectorAction = vi.fn();
+const mockDraftPullRequestOnceAction = vi.fn();
 
 vi.mock("../index.js", () => ({
-	get packageChangeDetectorAction() {
-		return mockPackageChangeDetectorAction;
+	get draftPullRequestOnceAction() {
+		return mockDraftPullRequestOnceAction;
 	},
 }));
 
-describe(runPackageChangeDetectorAction, () => {
+describe(runDraftPullRequestOnceAction, () => {
 	it("sets a failure if there is no pull_request or pull_request_target in the payload", async () => {
 		const context = {
 			payload: {},
 		} as typeof github.context;
 
-		await runPackageChangeDetectorAction(context);
+		await runDraftPullRequestOnceAction(context);
 
 		expect(mockSetFailed).toHaveBeenCalledWith(
 			"This action can only be used in a pull_request or pull_request_target event.",
 		);
-		expect(mockPackageChangeDetectorAction).not.toHaveBeenCalled();
+		expect(mockDraftPullRequestOnceAction).not.toHaveBeenCalled();
 	});
 
 	it("sets a failure if a pull_request base has no SHA", async () => {
@@ -50,12 +50,12 @@ describe(runPackageChangeDetectorAction, () => {
 			},
 		} as unknown as typeof github.context;
 
-		await runPackageChangeDetectorAction(context);
+		await runDraftPullRequestOnceAction(context);
 
 		expect(mockSetFailed).toHaveBeenCalledWith(
 			"The payload base SHA must be a string.",
 		);
-		expect(mockPackageChangeDetectorAction).not.toHaveBeenCalled();
+		expect(mockDraftPullRequestOnceAction).not.toHaveBeenCalled();
 	});
 
 	it("sets a failure if a pull_request head has no SHA", async () => {
@@ -70,15 +70,15 @@ describe(runPackageChangeDetectorAction, () => {
 			},
 		} as unknown as typeof github.context;
 
-		await runPackageChangeDetectorAction(context);
+		await runDraftPullRequestOnceAction(context);
 
 		expect(mockSetFailed).toHaveBeenCalledWith(
 			"The payload head SHA must be a string.",
 		);
-		expect(mockPackageChangeDetectorAction).not.toHaveBeenCalled();
+		expect(mockDraftPullRequestOnceAction).not.toHaveBeenCalled();
 	});
 
-	it("calls packageChangeDetectorAction when payload pull_request has base and head SHAs", async () => {
+	it("calls draftPullRequestOnceAction when payload pull_request has base and head SHAs", async () => {
 		const properties = "engines,exports";
 		const refBase = "abc123";
 		const refHead = "def456";
@@ -101,9 +101,9 @@ describe(runPackageChangeDetectorAction, () => {
 
 		mockGetMultilineInput.mockReturnValueOnce(properties);
 
-		await runPackageChangeDetectorAction(context);
+		await runDraftPullRequestOnceAction(context);
 
-		expect(mockPackageChangeDetectorAction).toHaveBeenCalledWith({
+		expect(mockDraftPullRequestOnceAction).toHaveBeenCalledWith({
 			owner,
 			properties,
 			refBase,
