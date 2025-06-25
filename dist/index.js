@@ -32784,6 +32784,7 @@ ${pendingInterceptorsFormatter.format(pending)}
 			const octokit = github.getOctokit(githubToken);
 			await octokit.rest.pulls.update({
 				body: `${body}\n\n<!-- ${indicator} -->`,
+				draft: true,
 				owner,
 				pull_number: number,
 				repo,
