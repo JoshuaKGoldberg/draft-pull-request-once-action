@@ -1,14 +1,16 @@
 import * as core from "@actions/core";
 
+import { defaultIndicator } from "./defaults.js";
+
 export interface DraftPullRequestOnceActionOptions {
-	indicator: string;
-	message: string;
+	indicator?: string;
+	message?: string;
 	owner: string;
 	repo: string;
 }
 
 export async function draftPullRequestOnceAction({
-	indicator,
+	indicator = defaultIndicator,
 	message,
 	owner,
 	repo,
@@ -27,5 +29,5 @@ export async function draftPullRequestOnceAction({
 		return;
 	}
 
-	// TODO: Populate message
+	// TODO: Comment with message if needed
 }

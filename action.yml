@@ -1,0 +1,13 @@
+author: JoshuaKGoldberg
+description: GitHub Action that changes a pull request to draft, once. 🙆
+inputs:
+  indicator:
+    description: Hidden comment to add to the pull request when it is changed to draft.
+    required: false
+  message:
+    description: Visible message to comment on the pull request when it is changed to draft.
+    required: false
+name: draft-pull-request-once-action
+runs:
+  main: dist/index.js
+  using: node20

@@ -32727,7 +32727,7 @@ ${pendingInterceptorsFormatter.format(pending)}
 							_actions_github__WEBPACK_IMPORTED_MODULE_0__,
 						);
 					/* harmony import */ var _runDraftPullRequestActionOnceAction_js__WEBPACK_IMPORTED_MODULE_1__ =
-						__nccwpck_require__(2155);
+						__nccwpck_require__(9145);
 
 					await (0,
 					_runDraftPullRequestActionOnceAction_js__WEBPACK_IMPORTED_MODULE_1__ /* .runDraftPullRequestOnceAction */.M)(
@@ -32745,7 +32745,7 @@ ${pendingInterceptorsFormatter.format(pending)}
 		/***/
 	},
 
-	/***/ 2155: /***/ (
+	/***/ 9145: /***/ (
 		__unused_webpack_module,
 		__webpack_exports__,
 		__nccwpck_require__,
@@ -32756,9 +32756,11 @@ ${pendingInterceptorsFormatter.format(pending)}
 		});
 
 		// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+core@1.11.1/node_modules/@actions/core/lib/core.js
-		var core = __nccwpck_require__(9999); // CONCATENATED MODULE: ./src/index.ts
+		var core = __nccwpck_require__(9999); // CONCATENATED MODULE: ./src/defaults.ts
+		const defaultIndicator = "Drafted by draft-pull-request-once-action"; // CONCATENATED MODULE: ./src/index.ts
+
 		async function draftPullRequestOnceAction({
-			indicator,
+			indicator = defaultIndicator,
 			message,
 			owner,
 			repo,
@@ -32774,7 +32776,7 @@ ${pendingInterceptorsFormatter.format(pending)}
 				core.info("Pull request already contains the indicator.");
 				return;
 			}
-			// TODO: Populate message
+			// TODO: Comment with message if needed
 		} // CONCATENATED MODULE: ./src/action/runDraftPullRequestActionOnceAction.ts
 
 		async function runDraftPullRequestOnceAction(context) {

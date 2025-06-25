@@ -1,6 +1,6 @@
 export interface DraftPullRequestOnceActionOptions {
-	indicator: string;
-	message: string;
+	indicator?: string;
+	message?: string;
 	owner: string;
 	repo: string;
 }
