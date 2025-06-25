@@ -32766,9 +32766,9 @@ ${pendingInterceptorsFormatter.format(pending)}
 			body,
 			drafted,
 			githubToken,
-			id,
 			indicator,
 			message,
+			nodeId,
 			number,
 			owner,
 			repo,
@@ -32786,8 +32786,8 @@ ${pendingInterceptorsFormatter.format(pending)}
 			await Promise.all([
 				octokit.graphql(
 					`
-				mutation ($id: ID!) {
-					convertPullRequestToDraft(input: {pullRequestId: $id}) {
+				mutation ($nodeId: ID!) {
+					convertPullRequestToDraft(input: {pullRequestId: $nodeId}) {
 						pullRequest {
 							id
 							isDraft
@@ -32795,7 +32795,7 @@ ${pendingInterceptorsFormatter.format(pending)}
 					}
 				}
 			`,
-					{ id },
+					{ nodeId },
 				),
 				octokit.rest.pulls.update({
 					body: `${body}\n\n<!-- ${indicator} -->`,
@@ -32848,9 +32848,9 @@ ${pendingInterceptorsFormatter.format(pending)}
 				body: payloadData.body,
 				drafted: payloadData.draft,
 				githubToken: getTokenInput("github-token", "GITHUB_TOKEN"),
-				id: payloadData.id,
 				indicator: core.getInput("indicator") || defaultIndicator,
 				message: core.getInput("message"),
+				nodeId: payloadData.node_id,
 				number: payloadData.number,
 				owner: context.repo.owner,
 				repo: context.repo.repo,

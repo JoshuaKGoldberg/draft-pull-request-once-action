@@ -5,9 +5,9 @@ export interface DraftPullRequestOnceActionOptions {
 	body: string;
 	drafted?: boolean;
 	githubToken: string;
-	id: number;
 	indicator: string;
 	message?: string;
+	nodeId: string;
 	number: number;
 	owner: string;
 	repo: string;
@@ -17,9 +17,9 @@ export async function draftPullRequestOnceAction({
 	body,
 	drafted,
 	githubToken,
-	id,
 	indicator,
 	message,
+	nodeId,
 	number,
 	owner,
 	repo,
@@ -40,8 +40,8 @@ export async function draftPullRequestOnceAction({
 	await Promise.all([
 		octokit.graphql(
 			`
-				mutation ($id: ID!) {
-					convertPullRequestToDraft(input: {pullRequestId: $id}) {
+				mutation ($nodeId: ID!) {
+					convertPullRequestToDraft(input: {pullRequestId: $nodeId}) {
 						pullRequest {
 							id
 							isDraft
@@ -49,7 +49,7 @@ export async function draftPullRequestOnceAction({
 					}
 				}
 			`,
-			{ id },
+			{ nodeId },
 		),
 		octokit.rest.pulls.update({
 			body: `${body}\n\n<!-- ${indicator} -->`,
