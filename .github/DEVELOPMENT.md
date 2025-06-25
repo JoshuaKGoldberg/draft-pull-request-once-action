@@ -3,8 +3,8 @@
 After [forking the repo from GitHub](https://help.github.com/articles/fork-a-repo) and [installing pnpm](https://pnpm.io/installation):
 
 ```shell
-git clone https://github.com/(your-name-here)/draft-pr-once-action
-cd draft-pr-once-action
+git clone https://github.com/(your-name-here)/draft-pull-request-once-action
+cd draft-pull-request-once-action
 pnpm install
 ```
 

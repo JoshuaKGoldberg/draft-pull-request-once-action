@@ -1,53 +1,77 @@
 import * as core from "@actions/core";
-import * as util from "node:util";
+import * as github from "@actions/github";
 
-export interface PackageChangeDetectorActionOptions {
+export interface DraftPullRequestOnceActionOptions {
+	body: string;
+	drafted?: boolean;
+	githubToken: string;
+	indicator: string;
+	message?: string;
+	nodeId: string;
+	number: number;
 	owner: string;
-	properties: string[];
-	refBase: string;
-	refHead: string;
 	repo: string;
 }
 
-export async function packageChangeDetectorAction({
+export async function draftPullRequestOnceAction({
+	body,
+	drafted,
+	githubToken,
+	indicator,
+	message,
+	nodeId,
+	number,
 	owner,
-	properties,
-	refBase,
-	refHead,
 	repo,
-}: PackageChangeDetectorActionOptions) {
-	core.debug(`Comparing package.json at ${refBase} and ${refHead}`);
+}: DraftPullRequestOnceActionOptions) {
+	if (drafted) {
+		core.info("Pull request is already a draft.");
+		return;
+	}
 
-	const [packageJsonPrevious, packageJsonUpdated] = await Promise.all([
-		getPackageJsonAt(refBase),
-		getPackageJsonAt(refHead),
+	if (body.includes(indicator)) {
+		core.info("Pull request already contains the indicator.");
+		return;
+	}
+
+	const octokit = github.getOctokit(githubToken);
+
+	await Promise.all([
+		octokit.graphql(
+			`
+				mutation ($nodeId: ID!) {
+					convertPullRequestToDraft(input: {pullRequestId: $nodeId}) {
+						pullRequest {
+							id
+							isDraft
+						}
+					}
+				}
+			`,
+			{ nodeId },
+		),
+		octokit.rest.pulls.update({
+			body: `${body}\n\n<!-- ${indicator} -->`,
+			draft: true,
+			owner,
+			pull_number: number,
+			repo,
+		}),
 	]);
 
-	const propertyKeys = properties
-		.flatMap((property) => property.split(/\n,/))
-		.filter(Boolean);
+	core.info(`PR body updated to include comment with indicator: ${indicator}`);
 
-	core.debug(`Will check properties: ${propertyKeys.join(", ")}`);
-
-	const changed = propertyKeys.some(
-		(propertyKey) =>
-			!util.isDeepStrictEqual(
-				packageJsonPrevious[propertyKey],
-				packageJsonUpdated[propertyKey],
-			),
-	);
-
-	core.setOutput("changed", changed.toString());
-
-	async function getPackageJsonAt(ref: string) {
-		const response = await fetch(
-			`https://raw.githubusercontent.com/${owner}/${repo}/${ref}/package.json`,
-		);
-
-		const body = await response.text();
-
-		core.debug(`Body at ${ref}: ${body}`);
-
-		return JSON.parse(body) as Record<string, unknown>;
+	if (!message) {
+		core.info("Skipping comment creation as no message is provided.");
+		return;
 	}
+
+	const comment = await octokit.rest.issues.createComment({
+		body: message,
+		issue_number: number,
+		owner,
+		repo,
+	});
+
+	core.info(`Comment created: ${comment.data.html_url}`);
 }

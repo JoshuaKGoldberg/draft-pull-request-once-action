@@ -14,8 +14,8 @@ jobs:
 
             The release is available on:
 
-            * [GitHub releases](https://github.com/JoshuaKGoldberg/draft-pr-once-action/releases/tag/{release_tag})
-            * [npm package (@latest dist-tag)](https://www.npmjs.com/package/draft-pr-once-action/v/${{ env.npm_version }})
+            * [GitHub releases](https://github.com/JoshuaKGoldberg/draft-pull-request-once-action/releases/tag/{release_tag})
+            * [npm package (@latest dist-tag)](https://www.npmjs.com/package/draft-pull-request-once-action/v/${{ env.npm_version }})
 
             Cheers! 📦🚀
 

@@ -1,10 +1,10 @@
 {
-	"name": "draft-pr-once-action",
+	"name": "draft-pull-request-once-action",
 	"version": "0.0.0",
 	"description": "GitHub Action that changes a pull request to draft, once. 🙆",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/JoshuaKGoldberg/draft-pr-once-action.git"
+		"url": "git+https://github.com/JoshuaKGoldberg/draft-pull-request-once-action.git"
 	},
 	"license": "MIT",
 	"author": {
@@ -35,12 +35,17 @@
 	"lint-staged": {
 		"*": "prettier --ignore-unknown --write"
 	},
+	"dependencies": {
+		"@actions/core": "^1.11.1",
+		"@actions/github": "^6.0.1"
+	},
 	"devDependencies": {
 		"@eslint-community/eslint-plugin-eslint-comments": "4.5.0",
 		"@eslint/js": "9.22.0",
 		"@release-it/conventional-changelog": "10.0.0",
 		"@types/eslint-plugin-markdown": "2.0.2",
 		"@types/node": "22.13.10",
+		"@vercel/ncc": "^0.38.3",
 		"@vitest/coverage-v8": "3.0.9",
 		"@vitest/eslint-plugin": "1.1.38",
 		"console-fail-test": "0.5.0",
