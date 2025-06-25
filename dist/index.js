@@ -32777,7 +32777,6 @@ ${pendingInterceptorsFormatter.format(pending)}
 				core.info("Pull request is already a draft.");
 				return;
 			}
-			console.log({ body, indicator });
 			if (body.includes(indicator)) {
 				core.info("Pull request already contains the indicator.");
 				return;
