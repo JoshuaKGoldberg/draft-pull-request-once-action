@@ -2,7 +2,7 @@ export interface DraftPullRequestOnceActionOptions {
 	body: string;
 	drafted?: boolean;
 	githubToken: string;
-	indicator?: string;
+	indicator: string;
 	message?: string;
 	number: number;
 	owner: string;

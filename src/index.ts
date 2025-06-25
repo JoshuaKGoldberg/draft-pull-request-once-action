@@ -1,13 +1,11 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 
-import { defaultIndicator } from "./defaults.js";
-
 export interface DraftPullRequestOnceActionOptions {
 	body: string;
 	drafted?: boolean;
 	githubToken: string;
-	indicator?: string;
+	indicator: string;
 	message?: string;
 	number: number;
 	owner: string;
@@ -18,7 +16,7 @@ export async function draftPullRequestOnceAction({
 	body,
 	drafted,
 	githubToken,
-	indicator = defaultIndicator,
+	indicator,
 	message,
 	number,
 	owner,
@@ -29,7 +27,7 @@ export async function draftPullRequestOnceAction({
 		return;
 	}
 
-	console.log({ defaultIndicator, indicator });
+	console.log({ indicator });
 	if (body.includes(indicator)) {
 		core.info("Pull request already contains the indicator.");
 		return;

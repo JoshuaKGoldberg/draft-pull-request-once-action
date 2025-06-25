@@ -32756,17 +32756,17 @@ ${pendingInterceptorsFormatter.format(pending)}
 		});
 
 		// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+core@1.11.1/node_modules/@actions/core/lib/core.js
-		var core = __nccwpck_require__(9999);
-		// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+github@6.0.1/node_modules/@actions/github/lib/github.js
-		var github = __nccwpck_require__(5380); // CONCATENATED MODULE: ./src/defaults.ts
+		var core = __nccwpck_require__(9999); // CONCATENATED MODULE: ./src/defaults.ts
 		const defaultIndicator =
-			"Drafted by draft-pull-request-once-action. Keep this comment to prevent the action from re-drafting the pull request once it's ready."; // CONCATENATED MODULE: ./src/index.ts
+			"Drafted by draft-pull-request-once-action. Keep this comment to prevent the action from re-drafting the pull request once it's ready.";
 
+		// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+github@6.0.1/node_modules/@actions/github/lib/github.js
+		var github = __nccwpck_require__(5380); // CONCATENATED MODULE: ./src/index.ts
 		async function draftPullRequestOnceAction({
 			body,
 			drafted,
 			githubToken,
-			indicator = defaultIndicator,
+			indicator,
 			message,
 			number,
 			owner,
@@ -32776,7 +32776,7 @@ ${pendingInterceptorsFormatter.format(pending)}
 				core.info("Pull request is already a draft.");
 				return;
 			}
-			console.log({ defaultIndicator: defaultIndicator, indicator });
+			console.log({ indicator });
 			if (body.includes(indicator)) {
 				core.info("Pull request already contains the indicator.");
 				return;
@@ -32824,7 +32824,7 @@ ${pendingInterceptorsFormatter.format(pending)}
 				body: payloadData.body,
 				drafted: payloadData.draft,
 				githubToken: getTokenInput("github-token", "GITHUB_TOKEN"),
-				indicator: core.getInput("indicator"),
+				indicator: core.getInput("indicator") || defaultIndicator,
 				message: core.getInput("message"),
 				number: payloadData.number,
 				owner: context.repo.owner,

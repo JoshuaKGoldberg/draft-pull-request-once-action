@@ -2,6 +2,7 @@ import type * as github from "@actions/github";
 
 import * as core from "@actions/core";
 
+import { defaultIndicator } from "../defaults.js";
 import { draftPullRequestOnceAction } from "../index.js";
 import { getTokenInput } from "./getTokenInput.js";
 
@@ -29,7 +30,7 @@ export async function runDraftPullRequestOnceAction(
 		body: payloadData.body,
 		drafted: payloadData.draft,
 		githubToken: getTokenInput("github-token", "GITHUB_TOKEN"),
-		indicator: core.getInput("indicator"),
+		indicator: core.getInput("indicator") || defaultIndicator,
 		message: core.getInput("message"),
 		number: payloadData.number,
 		owner: context.repo.owner,
