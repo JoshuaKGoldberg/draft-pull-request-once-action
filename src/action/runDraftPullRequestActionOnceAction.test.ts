@@ -2,14 +2,15 @@ import type * as github from "@actions/github";
 
 import { describe, expect, it, vi } from "vitest";
 
+import { defaultIndicator } from "../defaults.js";
 import { runDraftPullRequestOnceAction } from "./runDraftPullRequestActionOnceAction.js";
 
-const mockGetMultilineInput = vi.fn();
+const mockGetInput = vi.fn();
 const mockSetFailed = vi.fn();
 
 vi.mock("@actions/core", () => ({
-	get getMultilineInput() {
-		return mockGetMultilineInput;
+	get getInput() {
+		return mockGetInput;
 	},
 	get setFailed() {
 		return mockSetFailed;
@@ -23,6 +24,14 @@ vi.mock("../index.js", () => ({
 		return mockDraftPullRequestOnceAction;
 	},
 }));
+
+const body = "PR body.";
+const githubToken = "gho-abc123";
+const drafted = false;
+const nodeId = "node-id-456";
+const number = 789;
+const owner = "test-owner";
+const repo = "test-repo";
 
 describe(runDraftPullRequestOnceAction, () => {
 	it("sets a failure if there is no pull_request or pull_request_target in the payload", async () => {
@@ -38,76 +47,71 @@ describe(runDraftPullRequestOnceAction, () => {
 		expect(mockDraftPullRequestOnceAction).not.toHaveBeenCalled();
 	});
 
-	it("sets a failure if a pull_request base has no SHA", async () => {
+	it("calls draftPullRequestOnceAction with the indicator and message when both exist", async () => {
+		const indicator = "example indicator";
+		const message = "This is a test message.";
+
 		const context = {
 			payload: {
 				pull_request: {
-					base: {},
-					head: {
-						sha: "abc123",
-					},
+					body,
+					draft: drafted,
+					node_id: nodeId,
+					number,
 				},
 			},
-		} as unknown as typeof github.context;
-
-		await runDraftPullRequestOnceAction(context);
-
-		expect(mockSetFailed).toHaveBeenCalledWith(
-			"The payload base SHA must be a string.",
-		);
-		expect(mockDraftPullRequestOnceAction).not.toHaveBeenCalled();
-	});
-
-	it("sets a failure if a pull_request head has no SHA", async () => {
-		const context = {
-			payload: {
-				pull_request: {
-					base: {
-						sha: "",
-					},
-					head: {},
-				},
-			},
-		} as unknown as typeof github.context;
-
-		await runDraftPullRequestOnceAction(context);
-
-		expect(mockSetFailed).toHaveBeenCalledWith(
-			"The payload head SHA must be a string.",
-		);
-		expect(mockDraftPullRequestOnceAction).not.toHaveBeenCalled();
-	});
-
-	it("calls draftPullRequestOnceAction when payload pull_request has base and head SHAs", async () => {
-		const properties = "engines,exports";
-		const refBase = "abc123";
-		const refHead = "def456";
-		const owner = "test-owner";
-		const repo = "test-repo";
-		const context = {
-			payload: {
-				pull_request: {
-					base: {
-						sha: refBase,
-					},
-					head: {
-						sha: refHead,
-					},
-				},
-			},
-			properties,
 			repo: { owner, repo },
 		} as unknown as typeof github.context;
 
-		mockGetMultilineInput.mockReturnValueOnce(properties);
+		mockGetInput
+			.mockReturnValueOnce(githubToken)
+			.mockReturnValueOnce(indicator)
+			.mockReturnValueOnce(message);
 
 		await runDraftPullRequestOnceAction(context);
 
 		expect(mockDraftPullRequestOnceAction).toHaveBeenCalledWith({
+			body,
+			drafted,
+			githubToken,
+			indicator,
+			message,
+			nodeId,
+			number,
 			owner,
-			properties,
-			refBase,
-			refHead,
+			repo,
+		});
+	});
+
+	it("calls draftPullRequestOnceAction with the default indicator and no message when neither exist", async () => {
+		const context = {
+			payload: {
+				pull_request: {
+					body,
+					draft: drafted,
+					node_id: nodeId,
+					number,
+				},
+			},
+			repo: { owner, repo },
+		} as unknown as typeof github.context;
+
+		mockGetInput
+			.mockReturnValueOnce(githubToken)
+			.mockReturnValueOnce(undefined)
+			.mockReturnValueOnce(undefined);
+
+		await runDraftPullRequestOnceAction(context);
+
+		expect(mockDraftPullRequestOnceAction).toHaveBeenCalledWith({
+			body,
+			drafted,
+			githubToken,
+			indicator: defaultIndicator,
+			message: undefined,
+			nodeId,
+			number,
+			owner,
 			repo,
 		});
 	});

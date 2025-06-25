@@ -66,12 +66,12 @@ export async function draftPullRequestOnceAction({
 		return;
 	}
 
-	const data = await octokit.rest.issues.createComment({
+	const comment = await octokit.rest.issues.createComment({
 		body: message,
 		issue_number: number,
 		owner,
 		repo,
 	});
 
-	core.info(`Comment created: ${data.data.html_url}`);
+	core.info(`Comment created: ${comment.data.html_url}`);
 }
