@@ -32727,7 +32727,7 @@ ${pendingInterceptorsFormatter.format(pending)}
 							_actions_github__WEBPACK_IMPORTED_MODULE_0__,
 						);
 					/* harmony import */ var _runDraftPullRequestActionOnceAction_js__WEBPACK_IMPORTED_MODULE_1__ =
-						__nccwpck_require__(9145);
+						__nccwpck_require__(4781);
 
 					await (0,
 					_runDraftPullRequestActionOnceAction_js__WEBPACK_IMPORTED_MODULE_1__ /* .runDraftPullRequestOnceAction */.M)(
@@ -32745,7 +32745,7 @@ ${pendingInterceptorsFormatter.format(pending)}
 		/***/
 	},
 
-	/***/ 9145: /***/ (
+	/***/ 4781: /***/ (
 		__unused_webpack_module,
 		__webpack_exports__,
 		__nccwpck_require__,
@@ -32756,35 +32756,76 @@ ${pendingInterceptorsFormatter.format(pending)}
 		});
 
 		// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+core@1.11.1/node_modules/@actions/core/lib/core.js
-		var core = __nccwpck_require__(9999); // CONCATENATED MODULE: ./src/defaults.ts
-		const defaultIndicator = "Drafted by draft-pull-request-once-action"; // CONCATENATED MODULE: ./src/index.ts
+		var core = __nccwpck_require__(9999);
+		// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+github@6.0.1/node_modules/@actions/github/lib/github.js
+		var github = __nccwpck_require__(5380); // CONCATENATED MODULE: ./src/defaults.ts
+		const defaultIndicator =
+			"Drafted by draft-pull-request-once-action. Keep this comment to prevent the action from re-drafting the pull request once it's ready."; // CONCATENATED MODULE: ./src/index.ts
 
 		async function draftPullRequestOnceAction({
+			body,
+			drafted,
+			githubToken,
 			indicator = defaultIndicator,
 			message,
+			number,
 			owner,
 			repo,
 		}) {
-			console.log("Got:", { indicator, message });
-			const isDraft = await Promise.resolve(false);
-			if (isDraft) {
+			if (drafted) {
 				core.info("Pull request is already a draft.");
 				return;
 			}
-			const currentBody = await Promise.resolve("TODO");
-			if (currentBody.includes(indicator)) {
+			if (body.includes(indicator)) {
 				core.info("Pull request already contains the indicator.");
 				return;
 			}
-			// TODO: Comment with message if needed
+			if (!message) {
+				core.info("Skipping comment creation as no message is provided.");
+				return;
+			}
+			const octokit = github.getOctokit(githubToken);
+			const data = await octokit.rest.issues.createComment({
+				body: message,
+				issue_number: number,
+				owner,
+				repo,
+			});
+			core.info(`Comment created: ${data.data.html_url}`);
+		} // CONCATENATED MODULE: external "node:process"
+
+		const external_node_process_namespaceObject =
+			__WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:process"); // CONCATENATED MODULE: ./src/action/getTokenInput.ts
+		function getTokenInput(name, backup) {
+			const token =
+				core.getInput(name) ||
+				external_node_process_namespaceObject.env[backup];
+			if (!token) {
+				throw new Error(
+					`No ${name} input or ${backup} environment variable defined.`,
+				);
+			}
+			return token;
 		} // CONCATENATED MODULE: ./src/action/runDraftPullRequestActionOnceAction.ts
 
 		async function runDraftPullRequestOnceAction(context) {
+			const payloadData =
+				context.payload.pull_request ?? context.payload.pull_request_target;
+			if (typeof payloadData !== "object") {
+				core.setFailed(
+					"This action can only be used in a pull_request or pull_request_target event.",
+				);
+				return;
+			}
 			console.log("Got context:", context);
 			console.log("Got context.payload:", context.payload);
 			await draftPullRequestOnceAction({
+				body: payloadData.body,
+				drafted: payloadData.draft,
+				githubToken: getTokenInput("github-token", "GITHUB_TOKEN"),
 				indicator: core.getInput("indicator"),
 				message: core.getInput("message"),
+				number: payloadData.number,
 				owner: context.repo.owner,
 				repo: context.repo.repo,
 			});
