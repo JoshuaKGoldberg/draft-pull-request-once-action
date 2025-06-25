@@ -32773,6 +32773,7 @@ ${pendingInterceptorsFormatter.format(pending)}
 			owner,
 			repo,
 		}) {
+			console.log({ nodeId });
 			if (drafted) {
 				core.info("Pull request is already a draft.");
 				return;
