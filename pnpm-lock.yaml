@@ -43,8 +43,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0
       create-typescript-app:
-        specifier: 2.42.1
-        version: 2.42.1(bingo-systems@0.5.4)(typescript@5.9.2)
+        specifier: 2.46.4
+        version: 2.46.4(bingo-systems@0.5.4)(typescript@5.9.2)
       cspell:
         specifier: 9.3.0
         version: 9.3.0
@@ -1904,9 +1904,9 @@ packages:
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
 
-  create-typescript-app@2.42.1:
-    resolution: {integrity: sha512-aF5RfNi7eVJSdtgGciKZTG6L+YA7q48OvansKSA1RnTX/CW05vhJ8UhoWOTGY7y7XyDxthX45+5fj71XkvDwqg==}
-    engines: {node: '>=18.3.0'}
+  create-typescript-app@2.46.4:
+    resolution: {integrity: sha512-8OMxjaupEgpH/pliX+HYOhKAHM3xO5Wgv29aK8R7NqokuY6GY0Z3Zg8VYhwSNuyXarHlpvvdr5YN1bXVdJmIuw==}
+    engines: {node: '>=20.19.0'}
     hasBin: true
 
   cross-spawn@7.0.6:
@@ -2553,8 +2553,8 @@ packages:
     resolution: {integrity: sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg==}
     engines: {node: '>= 4'}
 
-  image-size@1.2.1:
-    resolution: {integrity: sha512-rH+46sQJ2dlwfjfhCyNx5thzrv+dtmBIhPHk0zgRUukHzZ/kRueTJXoYYsclBaKcSMBWuGbOFXtioLpzTb5euw==}
+  image-size@2.0.2:
+    resolution: {integrity: sha512-IRqXKlaXwgSMAMtpNzZa1ZAe8m+Sa1770Dhk8VkSsP9LS+iHD62Zd8FQKs8fbPiagBE7BzoFX23cxFnwshpV6w==}
     engines: {node: '>=16.x'}
     hasBin: true
 
@@ -2919,9 +2919,9 @@ packages:
     resolution: {integrity: sha512-Xt/oY7bAiHwukL1iru2np5LIkhwD19Y7frlsiDILK62v3jucXCD6JXlZlwMG12HZOR+roHIVuJZrfCkOhp6k3g==}
     engines: {node: '>=20'}
 
-  marked@15.0.12:
-    resolution: {integrity: sha512-8dD6FusOQSrpv9Z1rdNMdlSgQOIP880DHqnohobOmYLElGEqAL/JvxvuxZO16r4HtjTlfPRDC1hbvxC9dPN2nA==}
-    engines: {node: '>= 18'}
+  marked@16.4.2:
+    resolution: {integrity: sha512-TI3V8YYWvkVf3KJe1dRkpnjs68JUPyEa5vjKrp1XEEJUAOaQc+Qj+L1qWbPd0SJuAdQkFU0h73sXXqwDYxsiDA==}
+    engines: {node: '>= 20'}
     hasBin: true
 
   mdast-util-from-markdown@0.8.5:
@@ -3424,9 +3424,6 @@ packages:
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
-
-  queue@6.0.2:
-    resolution: {integrity: sha512-iHZWu+q3IdFZFX36ro/lKBkSvfkztY5Y7HMiPlOUjhupPcG2JMfst2KKEpu5XndviX/3UhFbRngUPNKtgvtZiA==}
 
   rc9@2.1.2:
     resolution: {integrity: sha512-btXCnMmRIBINM2LDZoEmOogIZU7Qe7zn4BpomSKZ/ykbLObuBdvG+mFq11DL6fjH1DRwHhrlgtYWG96bJiC7Cg==}
@@ -5861,7 +5858,7 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  create-typescript-app@2.42.1(bingo-systems@0.5.4)(typescript@5.9.2):
+  create-typescript-app@2.46.4(bingo-systems@0.5.4)(typescript@5.9.2):
     dependencies:
       '@typescript-eslint/typescript-estree': 8.46.3(typescript@5.9.2)
       bingo: 0.5.16
@@ -5873,7 +5870,7 @@ snapshots:
       git-url-parse: 16.1.0
       github-default-labels: 0.1.1
       html-to-text: 9.0.5
-      image-size: 1.2.1
+      image-size: 2.0.2
       input-from-file: 0.5.4(bingo@0.5.16)
       input-from-file-json: 0.5.4(bingo@0.5.16)(zod@3.25.67)
       input-from-script: 0.5.4(bingo@0.5.16)
@@ -5881,7 +5878,7 @@ snapshots:
       json5: 2.2.3
       lazy-value: 3.0.0
       lodash: 4.17.21
-      marked: 15.0.12
+      marked: 16.4.2
       npm-user: 6.1.1
       object-strings-deep: 0.1.2
       parse-author: 2.0.0
@@ -6686,9 +6683,7 @@ snapshots:
 
   ignore@7.0.5: {}
 
-  image-size@1.2.1:
-    dependencies:
-      queue: 6.0.2
+  image-size@2.0.2: {}
 
   import-fresh@3.3.1:
     dependencies:
@@ -7050,7 +7045,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  marked@15.0.12: {}
+  marked@16.4.2: {}
 
   mdast-util-from-markdown@0.8.5:
     dependencies:
@@ -7694,10 +7689,6 @@ snapshots:
   punycode@2.3.1: {}
 
   queue-microtask@1.2.3: {}
-
-  queue@6.0.2:
-    dependencies:
-      inherits: 2.0.4
 
   rc9@2.1.2:
     dependencies:
