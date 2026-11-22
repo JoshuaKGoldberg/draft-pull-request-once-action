@@ -37,7 +37,7 @@ describe(runDraftPullRequestOnceAction, () => {
 	it("sets a failure if there is no pull_request or pull_request_target in the payload", async () => {
 		const context = {
 			payload: {},
-		} as typeof github.context;
+		} as unknown as typeof github.context;
 
 		await runDraftPullRequestOnceAction(context);
 
