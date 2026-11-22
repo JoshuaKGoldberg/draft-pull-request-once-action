@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { getTokenInput } from "./getTokenInput.js";
+import { getTokenInput } from "./getTokenInput.ts";
 
 const mockGetInfo = vi.fn();
 
@@ -22,7 +22,7 @@ const backup = "FAKE_BACKUP";
 const token = "abc123";
 const name = "fake-name";
 
-describe("getTokenInput", () => {
+describe(getTokenInput, () => {
 	it("returns the core input when it exists", () => {
 		mockGetInfo.mockReturnValueOnce(token);
 

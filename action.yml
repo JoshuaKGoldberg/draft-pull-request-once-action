@@ -1,3 +1,4 @@
+# eslint-disable yml/file-extension -- GitHub Actions metadata file name
 author: JoshuaKGoldberg
 description: GitHub Action that changes a pull request to draft, once. 🙆
 inputs:

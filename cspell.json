@@ -2,7 +2,6 @@
 	"dictionaries": ["npm", "node", "typescript"],
 	"ignorePaths": [
 		".all-contributorsrc",
-		".github",
 		"CHANGELOG.md",
 		"coverage",
 		"dist",
@@ -10,5 +9,17 @@
 		"node_modules",
 		"pnpm-lock.yaml"
 	],
-	"words": ["eeef"]
+	"words": [
+		"JoshuaKGoldberg",
+		"MatteoGabriele",
+		"agentscan",
+		"apexskier",
+		"eeef",
+		"mshick",
+		"octoguide",
+		"peakoss",
+		"stefanzweifel",
+		"zizmor",
+		"zizmorcore"
+	]
 }
