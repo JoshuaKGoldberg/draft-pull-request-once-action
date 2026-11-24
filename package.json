@@ -1,6 +1,6 @@
 {
 	"name": "draft-pull-request-once-action",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "GitHub Action that changes a pull request to draft, once. 🙆",
 	"repository": {
 		"type": "git",
