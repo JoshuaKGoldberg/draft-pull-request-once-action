@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { draftPullRequestOnceAction } from "./index.js";
+import { draftPullRequestOnceAction } from "./index.ts";
 
 const mockInfo = vi.fn();
 

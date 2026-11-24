@@ -26,6 +26,5 @@
   ],
   "projectName": "draft-pull-request-once-action",
   "projectOwner": "JoshuaKGoldberg",
-  "repoType": "github",
-  "commitConvention": "angular"
+  "repoType": "github"
 }

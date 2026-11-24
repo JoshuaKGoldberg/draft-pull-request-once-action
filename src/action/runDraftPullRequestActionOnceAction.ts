@@ -2,9 +2,9 @@ import type * as github from "@actions/github";
 
 import * as core from "@actions/core";
 
-import { defaultIndicator } from "../defaults.js";
-import { draftPullRequestOnceAction } from "../index.js";
-import { getTokenInput } from "./getTokenInput.js";
+import { defaultIndicator } from "../defaults.ts";
+import { draftPullRequestOnceAction } from "../index.ts";
+import { getTokenInput } from "./getTokenInput.ts";
 
 type PayloadData = typeof github.context.payload.pull_request & {
 	body: string;

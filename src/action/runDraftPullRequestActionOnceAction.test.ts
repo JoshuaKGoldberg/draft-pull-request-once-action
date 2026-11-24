@@ -2,8 +2,8 @@ import type * as github from "@actions/github";
 
 import { describe, expect, it, vi } from "vitest";
 
-import { defaultIndicator } from "../defaults.js";
-import { runDraftPullRequestOnceAction } from "./runDraftPullRequestActionOnceAction.js";
+import { defaultIndicator } from "../defaults.ts";
+import { runDraftPullRequestOnceAction } from "./runDraftPullRequestActionOnceAction.ts";
 
 const mockGetInput = vi.fn();
 const mockSetFailed = vi.fn();
@@ -19,7 +19,7 @@ vi.mock("@actions/core", () => ({
 
 const mockDraftPullRequestOnceAction = vi.fn();
 
-vi.mock("../index.js", () => ({
+vi.mock("../index.ts", () => ({
 	get draftPullRequestOnceAction() {
 		return mockDraftPullRequestOnceAction;
 	},
@@ -37,7 +37,7 @@ describe(runDraftPullRequestOnceAction, () => {
 	it("sets a failure if there is no pull_request or pull_request_target in the payload", async () => {
 		const context = {
 			payload: {},
-		} as typeof github.context;
+		} as unknown as typeof github.context;
 
 		await runDraftPullRequestOnceAction(context);
 
