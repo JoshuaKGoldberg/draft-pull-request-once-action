@@ -5273,10 +5273,10 @@ snapshots:
     dependencies:
       '@octokit/types': 18.0.0
 
-  bingo-stratum@0.11.1(bingo-fs@0.8.0)(bingo-systems@0.9.1)(bingo@0.16.2(zod@4.4.3))(zod@4.4.3):
+  bingo-stratum@0.11.1(bingo-fs@0.8.0)(bingo-systems@0.9.1)(bingo@0.16.2)(zod@4.4.3):
     dependencies:
       all-properties-lazy: 0.1.0
-      bingo: 0.16.2(zod@4.4.3)
+      bingo: 0.16.2
       bingo-fs: 0.8.0
       bingo-systems: 0.9.1
       cached-factory: 0.3.0
@@ -5293,7 +5293,7 @@ snapshots:
       get-github-auth-token: 0.2.0
       octokit: 5.0.5
 
-  bingo@0.16.2(zod@4.4.3):
+  bingo@0.16.2:
     dependencies:
       '@clack/prompts': 1.9.0
       all-properties-lazy: 0.1.0
@@ -5311,7 +5311,6 @@ snapshots:
       read-pkg: 10.1.0
       slugify: 1.6.9
       without-undefined-properties: 0.1.2
-    optionalDependencies:
       zod: 4.4.3
 
   boolbase@1.0.0: {}
@@ -5502,9 +5501,9 @@ snapshots:
       '@prettier/sync': 0.6.1(prettier@3.10.1)
       '@typescript-eslint/typescript-estree': 8.73.0(typescript@5.9.3)
       all-contributors-types: 0.1.0
-      bingo: 0.16.2(zod@4.4.3)
+      bingo: 0.16.2
       bingo-fs: 0.8.0
-      bingo-stratum: 0.11.1(bingo-fs@0.8.0)(bingo-systems@0.9.1)(bingo@0.16.2(zod@4.4.3))(zod@4.4.3)
+      bingo-stratum: 0.11.1(bingo-fs@0.8.0)(bingo-systems@0.9.1)(bingo@0.16.2)(zod@4.4.3)
       cached-factory: 0.3.0
       cspell-populate-words: 0.3.1
       execa: 10.2.1
@@ -5512,9 +5511,9 @@ snapshots:
       github-default-labels: 0.1.1
       html-to-text: 10.0.1
       image-size: 2.1.0
-      input-from-file: 0.8.0(bingo@0.16.2(zod@4.4.3))(zod@4.4.3)
-      input-from-file-json: 0.7.0(bingo@0.16.2(zod@4.4.3))(zod@4.4.3)
-      input-from-script: 0.8.0(bingo@0.16.2(zod@4.4.3))(zod@4.4.3)
+      input-from-file: 0.8.0(bingo@0.16.2)
+      input-from-file-json: 0.7.0(bingo@0.16.2)
+      input-from-script: 0.8.0(bingo@0.16.2)
       js-yaml: 5.5.0
       json5: 2.2.3
       lazy-value: 3.0.0
@@ -6344,23 +6343,20 @@ snapshots:
 
   ini@6.0.0: {}
 
-  input-from-file-json@0.7.0(bingo@0.16.2(zod@4.4.3))(zod@4.4.3):
+  input-from-file-json@0.7.0(bingo@0.16.2):
     dependencies:
-      bingo: 0.16.2(zod@4.4.3)
-      input-from-file: 0.8.0(bingo@0.16.2(zod@4.4.3))(zod@4.4.3)
-    optionalDependencies:
+      bingo: 0.16.2
+      input-from-file: 0.8.0(bingo@0.16.2)
       zod: 4.4.3
 
-  input-from-file@0.8.0(bingo@0.16.2(zod@4.4.3))(zod@4.4.3):
+  input-from-file@0.8.0(bingo@0.16.2):
     dependencies:
-      bingo: 0.16.2(zod@4.4.3)
-    optionalDependencies:
+      bingo: 0.16.2
       zod: 4.4.3
 
-  input-from-script@0.8.0(bingo@0.16.2(zod@4.4.3))(zod@4.4.3):
+  input-from-script@0.8.0(bingo@0.16.2):
     dependencies:
-      bingo: 0.16.2(zod@4.4.3)
-    optionalDependencies:
+      bingo: 0.16.2
       zod: 4.4.3
 
   ip-address@10.2.0: {}
